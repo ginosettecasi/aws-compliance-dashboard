@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Compliance Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 { color: #0073e6; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 AWS Compliance Dashboard</h1>
+        <p>Automated compliance report for AWS Security Hub findings.</p>
+        <table id="compliance-table">
+            <thead>
+                <tr>
+                    <th>Issue</th>
+                    <th>Severity</th>
+                    <th>Service</th>
+                </tr>
+            </thead>
+            <tbody id="compliance-data">
+                <tr><td colspan="3">Loading compliance data...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        fetch('compliance-report.json')
+            .then(response => response.json())
+            .then(data => {
+                let tableBody = document.getElementById('compliance-data');
+                tableBody.innerHTML = "";
+                data.findings.forEach(finding => {
+                    let row = `<tr>
+                        <td>${finding.title}</td>
+                        <td>${finding.severity}</td>
+                        <td>${finding.service}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error("Error loading compliance data:", error));
+    </script>
+</body>
+</html>
