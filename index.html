@@ -7,21 +7,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e2e;
+            color: #ffffff;
             text-align: center;
-            background-color: #f4f4f4;
             padding: 20px;
         }
         .container {
             max-width: 1000px;
             margin: auto;
-            background: white;
+            background: #29293d;
             padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
         }
-        h1 { color: #0073e6; }
-        p { font-size: 14px; color: gray; }
+        h1 { color: #ffcc00; }
+        p { font-size: 14px; color: #bbb; }
         select, button {
             margin: 10px;
             padding: 8px;
@@ -31,15 +32,16 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background: #34344a;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #444;
+            padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #0073e6;
-            color: white;
+            background-color: #ffcc00;
+            color: black;
             cursor: pointer;
         }
         .high { background-color: #ff4d4d; color: white; }
@@ -51,33 +53,18 @@
 <body>
     <div class="container">
         <h1>🔒 AWS Compliance Dashboard</h1>
-        <p>Automated security compliance report from AWS Security Hub.</p>
         <p><strong>Last Updated:</strong> <span id="last-updated">Loading...</span></p>
 
-        <!-- 🔍 Filtering Options -->
-        <label for="severity-filter">Filter by Severity:</label>
-        <select id="severity-filter">
-            <option value="all">All</option>
-            <option value="Critical">Critical</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-        </select>
-
-        <button onclick="exportToCSV()">📥 Export CSV</button>
-
-        <!-- 📊 Chart for Severity Distribution -->
         <canvas id="severityChart" width="400" height="200"></canvas>
 
-        <!-- 📋 Compliance Findings Table -->
         <table id="compliance-table">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">Issue 🔽</th>
-                    <th onclick="sortTable(1)">Severity 🔽</th>
-                    <th onclick="sortTable(2)">Service 🔽</th>
-                    <th onclick="sortTable(3)">Compliance Standard 🔽</th>
-                    <th onclick="sortTable(4)">Remediation Timeframe 🔽</th>
+                    <th>Issue</th>
+                    <th>Severity</th>
+                    <th>Service</th>
+                    <th>Compliance Standard</th>
+                    <th>Remediation Timeframe</th>
                 </tr>
             </thead>
             <tbody id="compliance-data">
@@ -99,7 +86,7 @@
                     let severityClass = finding.severity.toLowerCase().replace(" ", "-");
                     severityCounts[finding.severity] = (severityCounts[finding.severity] || 0) + 1;
 
-                    let row = `<tr class="finding" data-severity="${finding.severity}">
+                    let row = `<tr>
                         <td>${finding.title}</td>
                         <td class="${severityClass}">${finding.severity}</td>
                         <td>${finding.service}</td>
@@ -111,7 +98,6 @@
 
                 lastUpdated.textContent = new Date().toLocaleString();
 
-                // 🎯 Render Severity Distribution Chart
                 new Chart(document.getElementById('severityChart'), {
                     type: 'bar',
                     data: {
@@ -125,35 +111,6 @@
                 });
             })
             .catch(error => console.error("Error loading compliance data:", error));
-
-        // 🔽 Sorting Functionality
-        function sortTable(columnIndex) {
-            let table = document.getElementById("compliance-table");
-            let rows = Array.from(table.rows).slice(1);
-            let sortedRows = rows.sort((a, b) => a.cells[columnIndex].textContent.localeCompare(b.cells[columnIndex].textContent));
-            table.tBodies[0].append(...sortedRows);
-        }
-
-        // 📊 Filtering Functionality
-        document.getElementById("severity-filter").addEventListener("change", function() {
-            let severity = this.value;
-            document.querySelectorAll(".finding").forEach(row => {
-                row.style.display = severity === "all" || row.dataset.severity === severity ? "" : "none";
-            });
-        });
-
-        // 📥 Export Table to CSV
-        function exportToCSV() {
-            let table = document.getElementById("compliance-table");
-            let rows = Array.from(table.rows);
-            let csvContent = rows.map(row => Array.from(row.cells).map(cell => cell.textContent).join(",")).join("\n");
-            let blob = new Blob([csvContent], { type: "text/csv" });
-            let url = URL.createObjectURL(blob);
-            let a = document.createElement("a");
-            a.href = url;
-            a.download = "AWS_Compliance_Report.csv";
-            a.click();
-        }
     </script>
 </body>
 </html>
