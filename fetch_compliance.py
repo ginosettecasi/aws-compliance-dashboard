@@ -23,6 +23,9 @@ COMPLIANCE_STANDARDS = {
     "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
 }
 
+# If finding is not explicitly mapped, assign all frameworks
+DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls"]
+
 # Remediation Timeframe Mapping (Industry Best Practices)
 REMEDIATION_TIME = {
     "Critical": "Immediate (Within 24 hours)",
@@ -42,8 +45,8 @@ try:
         severity = finding.get("Severity", {}).get("Label", "Unknown")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
 
-        # Assign Compliance Standards (Dynamically)
-        compliance_standards = COMPLIANCE_STANDARDS.get(title, ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls"])  
+        # Assign Compliance Standards Dynamically
+        compliance_standards = COMPLIANCE_STANDARDS.get(title, DEFAULT_COMPLIANCE_STANDARDS)  
         compliance_text = ", ".join(compliance_standards)
 
         # Assign Remediation Timeframe based on severity
