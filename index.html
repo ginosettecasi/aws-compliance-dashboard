@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AWS Compliance Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +13,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
             background: white;
             padding: 20px;
@@ -20,6 +21,12 @@
             border-radius: 10px;
         }
         h1 { color: #0073e6; }
+        p { font-size: 14px; color: gray; }
+        select, button {
+            margin: 10px;
+            padding: 8px;
+            font-size: 14px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -33,6 +40,7 @@
         th {
             background-color: #0073e6;
             color: white;
+            cursor: pointer;
         }
         .high { background-color: #ff4d4d; color: white; }
         .medium { background-color: #ffcc00; color: black; }
@@ -44,14 +52,32 @@
     <div class="container">
         <h1>🔒 AWS Compliance Dashboard</h1>
         <p>Automated security compliance report from AWS Security Hub.</p>
+        <p><strong>Last Updated:</strong> <span id="last-updated">Loading...</span></p>
+
+        <!-- 🔍 Filtering Options -->
+        <label for="severity-filter">Filter by Severity:</label>
+        <select id="severity-filter">
+            <option value="all">All</option>
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+
+        <button onclick="exportToCSV()">📥 Export CSV</button>
+
+        <!-- 📊 Chart for Severity Distribution -->
+        <canvas id="severityChart" width="400" height="200"></canvas>
+
+        <!-- 📋 Compliance Findings Table -->
         <table id="compliance-table">
             <thead>
                 <tr>
-                    <th>Issue</th>
-                    <th>Severity</th>
-                    <th>Service</th>
-                    <th>Compliance Standard</th>
-                    <th>Remediation Timeframe</th>
+                    <th onclick="sortTable(0)">Issue 🔽</th>
+                    <th onclick="sortTable(1)">Severity 🔽</th>
+                    <th onclick="sortTable(2)">Service 🔽</th>
+                    <th onclick="sortTable(3)">Compliance Standard 🔽</th>
+                    <th onclick="sortTable(4)">Remediation Timeframe 🔽</th>
                 </tr>
             </thead>
             <tbody id="compliance-data">
@@ -65,10 +91,15 @@
             .then(response => response.json())
             .then(data => {
                 let tableBody = document.getElementById('compliance-data');
+                let lastUpdated = document.getElementById('last-updated');
+                let severityCounts = { "Critical": 0, "High": 0, "Medium": 0, "Low": 0 };
+
                 tableBody.innerHTML = "";
                 data.findings.forEach(finding => {
                     let severityClass = finding.severity.toLowerCase().replace(" ", "-");
-                    let row = `<tr>
+                    severityCounts[finding.severity] = (severityCounts[finding.severity] || 0) + 1;
+
+                    let row = `<tr class="finding" data-severity="${finding.severity}">
                         <td>${finding.title}</td>
                         <td class="${severityClass}">${finding.severity}</td>
                         <td>${finding.service}</td>
@@ -77,8 +108,52 @@
                     </tr>`;
                     tableBody.innerHTML += row;
                 });
+
+                lastUpdated.textContent = new Date().toLocaleString();
+
+                // 🎯 Render Severity Distribution Chart
+                new Chart(document.getElementById('severityChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ["Critical", "High", "Medium", "Low"],
+                        datasets: [{
+                            label: 'Findings Count',
+                            data: [severityCounts["Critical"], severityCounts["High"], severityCounts["Medium"], severityCounts["Low"]],
+                            backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50']
+                        }]
+                    }
+                });
             })
             .catch(error => console.error("Error loading compliance data:", error));
+
+        // 🔽 Sorting Functionality
+        function sortTable(columnIndex) {
+            let table = document.getElementById("compliance-table");
+            let rows = Array.from(table.rows).slice(1);
+            let sortedRows = rows.sort((a, b) => a.cells[columnIndex].textContent.localeCompare(b.cells[columnIndex].textContent));
+            table.tBodies[0].append(...sortedRows);
+        }
+
+        // 📊 Filtering Functionality
+        document.getElementById("severity-filter").addEventListener("change", function() {
+            let severity = this.value;
+            document.querySelectorAll(".finding").forEach(row => {
+                row.style.display = severity === "all" || row.dataset.severity === severity ? "" : "none";
+            });
+        });
+
+        // 📥 Export Table to CSV
+        function exportToCSV() {
+            let table = document.getElementById("compliance-table");
+            let rows = Array.from(table.rows);
+            let csvContent = rows.map(row => Array.from(row.cells).map(cell => cell.textContent).join(",")).join("\n");
+            let blob = new Blob([csvContent], { type: "text/csv" });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement("a");
+            a.href = url;
+            a.download = "AWS_Compliance_Report.csv";
+            a.click();
+        }
     </script>
 </body>
 </html>
