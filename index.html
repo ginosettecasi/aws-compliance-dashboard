@@ -28,10 +28,12 @@
             border-collapse: collapse;
             margin-top: 20px;
             background: #29293d;
+            border-radius: 8px;
+            overflow: hidden;
         }
         th, td {
             border: 1px solid #444;
-            padding: 10px;
+            padding: 12px;
             text-align: left;
         }
         th {
@@ -77,7 +79,7 @@
                 tableBody.innerHTML = "";
                 data.findings.forEach(finding => {
                     let severityClass = finding.severity.toLowerCase().replace(" ", "-");
-                    severityCounts[finding.severity] = (severityCounts[finding.severity] || 0) + 1;
+                    severityCounts[finding.severity]++;
 
                     let row = `<tr>
                         <td>${finding.title}</td>
@@ -94,12 +96,8 @@
                 new Chart(document.getElementById('severityChart'), {
                     type: 'bar',
                     data: {
-                        labels: ["Critical", "High", "Medium", "Low"],
-                        datasets: [{
-                            label: 'Findings Count',
-                            data: [severityCounts["Critical"], severityCounts["High"], severityCounts["Medium"], severityCounts["Low"]],
-                            backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50']
-                        }]
+                        labels: Object.keys(severityCounts),
+                        datasets: [{ label: 'Findings Count', data: Object.values(severityCounts), backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50'] }]
                     }
                 });
             });
