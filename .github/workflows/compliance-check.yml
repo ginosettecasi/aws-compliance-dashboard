@@ -21,6 +21,14 @@ jobs:
       - name: Install Dependencies
         run: pip install boto3
 
+        - name: Debug AWS Credentials
+  env:
+    AWS_REGION: us-east-2
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  run: |
+    aws sts get-caller-identity
+
       - name: Fetch AWS Security Findings
         env:
           AWS_REGION: us-east-2  # ✅ Updated to correct region
