@@ -1,0 +1,29 @@
+{
+    "findings": [
+        {
+            "title": "s3-bucket-public-read-prohibited",
+            "severity": "MEDIUM",
+            "service": "AwsS3Bucket"
+        },
+        {
+            "title": "root-account-hardware-mfa-enabled",
+            "severity": "MEDIUM",
+            "service": "Other"
+        },
+        {
+            "title": "ec2-ebs-encryption-by-default",
+            "severity": "MEDIUM",
+            "service": "Other"
+        },
+        {
+            "title": "root-account-mfa-enabled",
+            "severity": "MEDIUM",
+            "service": "Other"
+        },
+        {
+            "title": "cloudtrail-enabled",
+            "severity": "MEDIUM",
+            "service": "Other"
+        }
+    ]
+}
