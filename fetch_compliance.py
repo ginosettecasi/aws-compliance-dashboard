@@ -10,14 +10,20 @@ print(f"DEBUG: IAM User ARN: {identity['Arn']}")
 # Initialize AWS Security Hub client
 securityhub_client = boto3.client('securityhub', region_name="us-east-2")
 
-# Industry-standard compliance frameworks commonly used in AWS Security Hub
-COMPLIANCE_STANDARDS = [
-    "ISO 27001", "ISO 27701", "SOC 2 Type II", "SOC 3",
-    "PCI DSS (all versions)", "FedRAMP", "GDPR",
-    "DISA STIG", "CIS Controls", "AWS Best Practices"
-]
+# Standard compliance frameworks used in AWS Security Hub
+COMPLIANCE_STANDARDS = {
+    "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP"],
+    "Root Account Has Active Keys": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP"],
+    "CloudTrail Not Enabled": ["CIS Controls", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
+    "IAM User Without MFA": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP", "CIS Controls"],
+    "EC2 Security Group Allows All Traffic": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP", "CIS Controls"],
+    "IAM Policy Allows Full Admin Access": ["SOC 2 Type II", "ISO 27001", "FedRAMP", "CIS Controls"],
+    "Unencrypted EBS Volume": ["PCI DSS", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
+    "RDS Publicly Accessible": ["ISO 27001", "CIS Controls", "SOC 2 Type II", "FedRAMP"],
+    "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
+}
 
-# Remediation Timeframe Mapping (Based on Industry Best Practices)
+# Remediation Timeframe Mapping (Industry Best Practices)
 REMEDIATION_TIME = {
     "Critical": "Immediate (Within 24 hours)",
     "High": "Within 7 Days",
@@ -32,27 +38,22 @@ try:
 
     findings = []
     for finding in response.get('Findings', []):
-        title = finding.get("Title", "No Title")
+        title = finding.get("Title", "Unknown Finding")
         severity = finding.get("Severity", {}).get("Label", "Unknown")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
 
-        # Dynamically map compliance standards based on keywords in the title
-        mapped_standards = []
-        for standard in COMPLIANCE_STANDARDS:
-            if any(keyword.lower() in title.lower() for keyword in ["s3", "iam", "encryption", "mfa", "security group", "logging", "access control"]):
-                mapped_standards.append(standard)
+        # Assign Compliance Standards (Dynamically)
+        compliance_standards = COMPLIANCE_STANDARDS.get(title, ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls"])  
+        compliance_text = ", ".join(compliance_standards)
 
-        # Ensure no empty compliance mappings
-        compliance_standards = ", ".join(mapped_standards) if mapped_standards else "Not Specified"
-
-        # Assign remediation timeframe based on severity
-        remediation_time = REMEDIATION_TIME.get(severity, "Unknown")
+        # Assign Remediation Timeframe based on severity
+        remediation_time = REMEDIATION_TIME.get(severity, "90 Days (Default)")
 
         findings.append({
             "title": title,
             "severity": severity,
             "service": service,
-            "compliance_standard": compliance_standards,
+            "compliance_standard": compliance_text,
             "remediation_time": remediation_time
         })
 
