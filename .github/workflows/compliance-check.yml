@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # Prevents using the default GitHub Actions token
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -20,15 +22,6 @@ jobs:
 
       - name: Install Dependencies
         run: pip install boto3
-
-      # 🔍 Debug Step: Check AWS Credentials in GitHub Actions
-      - name: Debug AWS Credentials
-        env:
-          AWS_REGION: us-east-2  # ✅ Correct Region
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws sts get-caller-identity
 
       - name: Fetch AWS Security Findings
         env:
@@ -39,9 +32,11 @@ jobs:
           python fetch_compliance.py
 
       - name: Commit and Push Report
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add compliance-report.json
           git commit -m "Updated compliance report"
-          git push
+          git push https://x-access-token:${GH_PAT}@github.com/ginosettecasi/aws-compliance-dashboard.git main
