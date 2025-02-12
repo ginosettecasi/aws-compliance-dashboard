@@ -10,21 +10,26 @@ print(f"DEBUG: IAM User ARN: {identity['Arn']}")
 # Initialize AWS Security Hub client
 securityhub_client = boto3.client('securityhub', region_name="us-east-2")
 
-# Compliance Standard Mapping (Example: Mapping AWS Controls to Common Compliance Standards)
+# Compliance Standard Mapping (Based on AWS Security Hub Standards)
 COMPLIANCE_MAPPING = {
-    "S3 Bucket Publicly Accessible": "CIS, PCI DSS, FedRAMP",
-    "Root Account Has Active Keys": "CIS, ISO 27001, SOC 2",
-    "CloudTrail Not Enabled": "CIS, FedRAMP, PCI DSS",
-    "IAM User Without MFA": "CIS, SOC 2, ISO 27001",
-    "Security Hub Not Enabled": "AWS Best Practices, CIS",
+    "S3 Bucket Publicly Accessible": ["CIS Controls", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
+    "Root Account Has Active Keys": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP", "CIS Controls"],
+    "CloudTrail Not Enabled": ["CIS Controls", "FedRAMP", "SOC 2 Type II", "ISO 27001"],
+    "IAM User Without MFA": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "CIS Controls"],
+    "Security Hub Not Enabled": ["AWS Best Practices", "CIS Controls", "ISO 27001"],
+    "EC2 Security Group Allows All Traffic": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP", "CIS Controls"],
+    "IAM Policy Allows Full Admin Access": ["SOC 2 Type II", "ISO 27001", "FedRAMP", "CIS Controls"],
+    "Unencrypted EBS Volume": ["PCI DSS", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
+    "RDS Publicly Accessible": ["CIS Controls", "ISO 27001", "FedRAMP", "SOC 2 Type II"],
+    "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
 }
 
-# Estimated Remediation Time (Based on Industry Best Practices)
+# Remediation Timeframe Mapping (Based on Industry Best Practices)
 REMEDIATION_TIME = {
-    "Critical": "Immediate",
-    "High": "7 Days",
-    "Medium": "30 Days",
-    "Low": "90 Days",
+    "Critical": "Immediate (Within 24 hours)",
+    "High": "Within 7 Days",
+    "Medium": "Within 30 Days",
+    "Low": "Within 90 Days",
     "Informational": "Best Effort",
 }
 
@@ -37,16 +42,16 @@ try:
         title = finding.get("Title", "No Title")
         severity = finding.get("Severity", {}).get("Label", "Unknown")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
-        
-        # Get Compliance Standard & Remediation Time
-        compliance_standard = COMPLIANCE_MAPPING.get(title, "Unknown")
+
+        # Get Compliance Standards & Remediation Time
+        compliance_standards = COMPLIANCE_MAPPING.get(title, ["Not Mapped"])
         remediation_time = REMEDIATION_TIME.get(severity, "Unknown")
 
         findings.append({
             "title": title,
             "severity": severity,
             "service": service,
-            "compliance_standard": compliance_standard,
+            "compliance_standard": ", ".join(compliance_standards),
             "remediation_time": remediation_time
         })
 
