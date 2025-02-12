@@ -3,27 +3,37 @@
         {
             "title": "s3-bucket-public-read-prohibited",
             "severity": "MEDIUM",
-            "service": "AwsS3Bucket"
+            "service": "AwsS3Bucket",
+            "compliance_standard": "Not Mapped",
+            "remediation_time": "Unknown"
         },
         {
             "title": "root-account-hardware-mfa-enabled",
             "severity": "MEDIUM",
-            "service": "Other"
+            "service": "Other",
+            "compliance_standard": "Not Mapped",
+            "remediation_time": "Unknown"
         },
         {
             "title": "ec2-ebs-encryption-by-default",
             "severity": "MEDIUM",
-            "service": "Other"
+            "service": "Other",
+            "compliance_standard": "Not Mapped",
+            "remediation_time": "Unknown"
         },
         {
             "title": "root-account-mfa-enabled",
             "severity": "MEDIUM",
-            "service": "Other"
+            "service": "Other",
+            "compliance_standard": "Not Mapped",
+            "remediation_time": "Unknown"
         },
         {
             "title": "cloudtrail-enabled",
             "severity": "MEDIUM",
-            "service": "Other"
+            "service": "Other",
+            "compliance_standard": "Not Mapped",
+            "remediation_time": "Unknown"
         }
     ]
 }
