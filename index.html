@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AWS Compliance Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #1e1e2e;
+            background-color: #121212;
             color: #ffffff;
             text-align: center;
             padding: 20px;
@@ -16,23 +16,18 @@
         .container {
             max-width: 1000px;
             margin: auto;
-            background: #29293d;
+            background: #1e1e2e;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
         }
         h1 { color: #ffcc00; }
         p { font-size: 14px; color: #bbb; }
-        select, button {
-            margin: 10px;
-            padding: 8px;
-            font-size: 14px;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            background: #34344a;
+            background: #29293d;
         }
         th, td {
             border: 1px solid #444;
@@ -42,7 +37,6 @@
         th {
             background-color: #ffcc00;
             color: black;
-            cursor: pointer;
         }
         .high { background-color: #ff4d4d; color: white; }
         .medium { background-color: #ffcc00; color: black; }
@@ -54,7 +48,6 @@
     <div class="container">
         <h1>🔒 AWS Compliance Dashboard</h1>
         <p><strong>Last Updated:</strong> <span id="last-updated">Loading...</span></p>
-
         <canvas id="severityChart" width="400" height="200"></canvas>
 
         <table id="compliance-table">
@@ -109,8 +102,7 @@
                         }]
                     }
                 });
-            })
-            .catch(error => console.error("Error loading compliance data:", error));
+            });
     </script>
 </body>
 </html>
