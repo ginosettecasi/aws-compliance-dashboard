@@ -35,6 +35,7 @@
             border: 1px solid #444;
             padding: 12px;
             text-align: left;
+            position: relative;
         }
         th {
             background-color: #ffcc00;
@@ -44,6 +45,24 @@
         .medium { background-color: #ffcc00; color: black; }
         .low { background-color: #4CAF50; color: white; }
         .critical { background-color: #990000; color: white; }
+
+        /* Tooltip styling */
+        .tooltip {
+            display: none;
+            position: absolute;
+            background: #000;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        td:hover .tooltip {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -85,7 +104,10 @@
                         <td>${finding.title}</td>
                         <td class="${severityClass}">${finding.severity}</td>
                         <td>${finding.service}</td>
-                        <td>${finding.compliance_standard}</td>
+                        <td>
+                            ${finding.compliance_standard}
+                            <span class="tooltip">${finding.full_compliance_standards}</span>
+                        </td>
                         <td>${finding.remediation_time}</td>
                     </tr>`;
                     tableBody.innerHTML += row;
