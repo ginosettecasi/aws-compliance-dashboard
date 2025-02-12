@@ -12,7 +12,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
             background: white;
             padding: 20px;
@@ -34,22 +34,28 @@
             background-color: #0073e6;
             color: white;
         }
+        .high { background-color: #ff4d4d; color: white; }
+        .medium { background-color: #ffcc00; color: black; }
+        .low { background-color: #4CAF50; color: white; }
+        .critical { background-color: #990000; color: white; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🔒 AWS Compliance Dashboard</h1>
-        <p>Automated compliance report for AWS Security Hub findings.</p>
+        <p>Automated security compliance report from AWS Security Hub.</p>
         <table id="compliance-table">
             <thead>
                 <tr>
                     <th>Issue</th>
                     <th>Severity</th>
                     <th>Service</th>
+                    <th>Compliance Standard</th>
+                    <th>Remediation Timeframe</th>
                 </tr>
             </thead>
             <tbody id="compliance-data">
-                <tr><td colspan="3">Loading compliance data...</td></tr>
+                <tr><td colspan="5">Loading compliance data...</td></tr>
             </tbody>
         </table>
     </div>
@@ -61,10 +67,13 @@
                 let tableBody = document.getElementById('compliance-data');
                 tableBody.innerHTML = "";
                 data.findings.forEach(finding => {
+                    let severityClass = finding.severity.toLowerCase().replace(" ", "-");
                     let row = `<tr>
                         <td>${finding.title}</td>
-                        <td>${finding.severity}</td>
+                        <td class="${severityClass}">${finding.severity}</td>
                         <td>${finding.service}</td>
+                        <td>${finding.compliance_standard}</td>
+                        <td>${finding.remediation_time}</td>
                     </tr>`;
                     tableBody.innerHTML += row;
                 });
