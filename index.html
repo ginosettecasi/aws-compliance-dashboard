@@ -46,22 +46,6 @@
             background-color: #ffcc00;
             color: black;
         }
-        .tooltip {
-            display: none;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-            font-size: 14px;
-            text-align: left;
-            white-space: pre-line;
-            width: max-content;
-            max-width: 250px;
-        }
-        .tooltip:hover {
-            display: block;
-        }
         .chart-container {
             margin: 20px auto;
             width: 90%;
@@ -103,26 +87,59 @@
                 }
 
                 const data = await response.json();
+                if (!data.findings || data.findings.length === 0) {
+                    throw new Error("No findings available.");
+                }
+
                 const tableBody = document.getElementById('compliance-data');
                 const lastUpdated = document.getElementById('last-updated');
-
                 tableBody.innerHTML = "";
 
+                const severityCounts = { Critical: 0, High: 0, Medium: 0, Low: 0 };
+                const remediationTimeframes = { Critical: 0, High: 0, Medium: 0, Low: 0 };
+
                 const rows = data.findings.map(finding => {
+                    if (severityCounts[finding.severity] !== undefined) {
+                        severityCounts[finding.severity]++;
+                        remediationTimeframes[finding.severity]++;
+                    }
+
                     return `<tr>
                         <td>${finding.title}</td>
                         <td class="${finding.severity.toLowerCase()}">${finding.severity}</td>
                         <td>${finding.service}</td>
-                        <td>
-                            ${finding.compliance_standard}
-                            <span class="tooltip">${finding.full_compliance_standards.join("\n")}</span>
-                        </td>
+                        <td>${finding.compliance_standard}</td>
                         <td>${finding.remediation_time}</td>
                     </tr>`;
                 });
 
                 tableBody.innerHTML = rows.join("");
                 lastUpdated.textContent = new Date().toLocaleString();
+
+                // Ensure Chart.js only loads if data is available
+                const ctx = document.getElementById('complianceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Critical", "High", "Medium", "Low"],
+                        datasets: [
+                            {
+                                label: 'Findings by Severity',
+                                data: [severityCounts.Critical, severityCounts.High, severityCounts.Medium, severityCounts.Low],
+                                backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50']
+                            },
+                            {
+                                label: 'Findings by FedRAMP Remediation Timeframe',
+                                data: [remediationTimeframes.Critical, remediationTimeframes.High, remediationTimeframes.Medium, remediationTimeframes.Low],
+                                backgroundColor: ['#660000', '#b30000', '#b38f00', '#2d7d2d']
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
 
             } catch (error) {
                 console.error("Error loading compliance-report.json:", error);
