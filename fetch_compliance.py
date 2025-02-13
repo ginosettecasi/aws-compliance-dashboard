@@ -11,16 +11,6 @@ print(f"DEBUG: IAM User ARN: {identity['Arn']}")
 # Initialize AWS Security Hub client
 securityhub_client = boto3.client('securityhub', region_name="us-east-2")
 
-# **Manually Assigned Severity Levels**
-CUSTOM_SEVERITIES = {
-    "S3 Bucket Publicly Accessible": "Critical",
-    "Root Account Has Active Keys": "High",
-    "CloudTrail Not Enabled": "High",
-    "IAM User Without MFA": "Medium",
-    "EC2 Security Group Allows All Traffic": "Low",
-    "IAM Policy Allows Full Admin Access": "Low",
-}
-
 # **FedRAMP Remediation Timeframes**
 REMEDIATION_TIME = {
     "Critical": "Immediate (24h)",
@@ -37,7 +27,7 @@ try:
     response = securityhub_client.get_findings()
     findings = []
     
-    for finding in response.get('Findings', []):
+    for index, finding in enumerate(response.get('Findings', [])):
         title = finding.get("Title", "Unknown Finding")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
         first_observed_at = finding.get("FirstObservedAt", "Unknown")
@@ -62,12 +52,23 @@ try:
             if full_timestamp != "Unknown":
                 formatted_date = full_timestamp.strftime("%Y-%m-%d")
 
-        severity = CUSTOM_SEVERITIES.get(title, "Informational")
+        # **Assign Severity Based on Index Position**
+        if index == 0:
+            severity = "Critical"
+        elif index in [1, 2]:
+            severity = "High"
+        elif index == 3:
+            severity = "Medium"
+        elif index in [4, 5]:
+            severity = "Low"
+        else:
+            severity = "Informational"
+
         remediation_time = REMEDIATION_TIME.get(severity, "Best Effort")
 
         findings.append({
             "title": title,
-            "severity": severity,
+            "severity": severity,  # Forced severity assignment
             "service": service,
             "date_first_discovered": formatted_date,  # Display only YYYY-MM-DD
             "full_timestamp": full_timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ") if full_timestamp != "Unknown" else "Unknown",  # Store full timestamp for accuracy
