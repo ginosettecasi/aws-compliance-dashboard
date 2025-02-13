@@ -40,6 +40,7 @@
             text-align: left;
             white-space: normal;
             word-wrap: break-word;
+            position: relative;
         }
         th {
             background-color: #ffcc00;
@@ -53,6 +54,30 @@
             margin: 20px auto;
             width: 90%;
             max-width: 1000px;
+        }
+
+        /* Tooltip Styling */
+        .tooltip {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: pre-line;
+            text-align: left;
+            z-index: 10;
+        }
+        td:hover .tooltip {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            max-width: 300px;
+            z-index: 10;
         }
     </style>
 </head>
@@ -103,11 +128,18 @@
                 const rows = data.findings.map(finding => {
                     remediationCounts[finding.remediation_time]++;
 
+                    // Check if compliance data exists
+                    let complianceContent = finding.compliance_standard || "Unknown";
+                    let complianceTooltip = finding.full_compliance_standards || "No additional details";
+
                     return `<tr>
                         <td>${finding.title}</td>
                         <td class="${finding.severity.toLowerCase()}">${finding.severity}</td>
                         <td>${finding.service}</td>
-                        <td>${finding.compliance_standard}</td>
+                        <td>
+                            ${complianceContent}
+                            <span class="tooltip">${complianceTooltip}</span>
+                        </td>
                         <td>${finding.date_first_discovered || "Unknown"}</td>
                         <td>${finding.remediation_time}</td>
                         <td>${finding.remediation_steps || "Refer to AWS Security Hub."}</td>
