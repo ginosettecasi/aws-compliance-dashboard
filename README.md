@@ -29,7 +29,7 @@ This repository eliminates **manual compliance tracking** and ensures **proactiv
      - **Next one finding:** 🟡 **Medium**
      - **Next two findings:** 🟢 **Low**
      - **Remaining findings:** ℹ️ **Informational**
-   - **FedRAMP-aligned remediation deadlines**:
+   - **Vulnerability remediation deadlines**:
      - `Critical` → Immediate (24h)
      - `High` → 7 Days
      - `Medium` → 30 Days
