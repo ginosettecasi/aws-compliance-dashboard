@@ -11,66 +11,82 @@ print(f"DEBUG: IAM User ARN: {identity['Arn']}")
 # Initialize AWS Security Hub client
 securityhub_client = boto3.client('securityhub', region_name="us-east-2")
 
-# **Manually Assigned Severities for Showcase Purposes**
-SHOWCASE_SEVERITIES = {
+# **Manually Assigned Severity Levels**
+CUSTOM_SEVERITIES = {
     "S3 Bucket Publicly Accessible": "Critical",
-    "Root Account Has Active Keys": "Critical",
+    "Root Account Has Active Keys": "High",
     "CloudTrail Not Enabled": "High",
     "IAM User Without MFA": "Medium",
-    "EC2 Security Group Allows All Traffic": "Medium",
+    "EC2 Security Group Allows All Traffic": "Low",
     "IAM Policy Allows Full Admin Access": "Low",
-    "Unencrypted EBS Volume": "Informational",
-    "RDS Publicly Accessible": "Informational",
-    "Unused IAM Credentials Not Removed": "Informational",
 }
 
 # **FedRAMP Remediation Timeframes**
-FEDRAMP_REMEDIATION_TIME = {
-    "Critical": "Immediate (Within 24 Hours)",
-    "High": "Within 7 Days",
-    "Medium": "Within 30 Days",
-    "Low": "Within 90 Days",
-    "Informational": "Best Effort (Best Practice)",
+REMEDIATION_TIME = {
+    "Critical": "Immediate (24h)",
+    "High": "7 Days",
+    "Medium": "30 Days",
+    "Low": "90 Days",
+    "Informational": "Best Effort",
 }
 
-# **Fetch findings from AWS Security Hub**
-response = securityhub_client.get_findings()
-
-findings = []
-for finding in response.get('Findings', []):
-    title = finding.get("Title", "Unknown Finding")
-    service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
-
-    # **Override severity with showcase values if applicable**
-    severity = SHOWCASE_SEVERITIES.get(title, "Informational")
-
-    # **Assign FedRAMP-based Remediation Timeframe**
-    remediation_time = FEDRAMP_REMEDIATION_TIME.get(severity, "Best Effort")
-
-    # **Assign Compliance Standards Dynamically**
-    compliance_standards = [
-        "ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP", "PCI DSS", "AWS Well-Architected Security Pillar"
-    ] if title in SHOWCASE_SEVERITIES else ["AWS Best Practices"]
-
-    # **Format compliance text for space efficiency**
-    compliance_text = f"{compliance_standards[0]} + {len(compliance_standards) - 1} more" if len(compliance_standards) > 1 else compliance_standards[0]
-
-    findings.append({
-        "title": title,
-        "severity": severity,
-        "service": service,
-        "compliance_standard": compliance_text,
-        "full_compliance_standards": compliance_standards,  # Store full list for tooltip
-        "remediation_time": remediation_time
-    })
-
-# **Save findings to JSON file**
-compliance_report = {
-    "timestamp": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
-    "findings": findings
+# **Remediation Steps**
+REMEDIATION_STEPS = {
+    "S3 Bucket Publicly Accessible": "Apply bucket policies to deny public access. Use VPC endpoints for secure access.",
+    "Root Account Has Active Keys": "Disable root access keys and enforce IAM role-based access.",
+    "CloudTrail Not Enabled": "Enable AWS CloudTrail in all regions for audit logging.",
+    "IAM User Without MFA": "Require MFA for all IAM users in security policies.",
+    "EC2 Security Group Allows All Traffic": "Restrict security groups to only necessary IP ranges.",
+    "IAM Policy Allows Full Admin Access": "Apply least privilege IAM policies. Use AWS IAM Access Analyzer.",
 }
 
-with open("compliance-report.json", "w") as f:
-    json.dump(compliance_report, f, indent=4)
+# **Timestamp for Compliance Report**
+report_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
 
-print("✅ Compliance report updated successfully!")
+try:
+    # **Fetch findings from AWS Security Hub**
+    response = securityhub_client.get_findings()
+
+    findings = []
+    for finding in response.get('Findings', []):
+        title = finding.get("Title", "Unknown Finding")
+        service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
+
+        # **Assign custom severity or default to Informational**
+        severity = CUSTOM_SEVERITIES.get(title, "Informational")
+
+        # **Assign Remediation Timeframe based on severity (FedRAMP-aligned)**
+        remediation_time = REMEDIATION_TIME.get(severity, "Best Effort")
+
+        # **Assign Remediation Steps**
+        remediation_steps = REMEDIATION_STEPS.get(title, "Refer to AWS Security Hub documentation.")
+
+        findings.append({
+            "title": title,
+            "severity": severity,
+            "service": service,
+            "remediation_time": remediation_time,
+            "remediation_steps": remediation_steps
+        })
+
+    # **Save findings to JSON file**
+    compliance_report = {
+        "timestamp": report_timestamp,
+        "findings": findings
+    }
+
+    with open("compliance-report.json", "w") as f:
+        json.dump(compliance_report, f, indent=4)
+
+    print("✅ Compliance report updated successfully!")
+    print(f"📅 Report Timestamp: {report_timestamp}")
+    print(f"🔍 Total Findings: {len(findings)}")
+
+except securityhub_client.exceptions.InvalidAccessException:
+    print("❌ ERROR: Invalid Access - AWS Security Hub may not be enabled or IAM permissions may be missing.")
+    print("🔹 Ensure your IAM user has `AWSSecurityHubReadOnlyAccess` attached.")
+    print("🔹 Ensure Security Hub is enabled in `us-east-2` region.")
+    exit(1)
+except Exception as e:
+    print(f"❌ ERROR: {str(e)}")
+    exit(1)
