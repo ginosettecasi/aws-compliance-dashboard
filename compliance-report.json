@@ -2,144 +2,184 @@
     "timestamp": "2025-02-13",
     "findings": [
         {
-            "title": "Amazon SageMaker notebook instances should not have direct internet access",
+            "title": "subnet-auto-assign-public-ip-disabled",
             "severity": "Critical",
+            "service": "AwsEc2Subnet",
+            "date_first_discovered": "Unknown",
+            "remediation_time": "Immediate (24h)",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "vpc-default-security-group-closed",
+            "severity": "High",
+            "service": "AwsEc2SecurityGroup",
+            "date_first_discovered": "Unknown",
+            "remediation_time": "7 Days",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "s3-bucket-public-read-prohibited",
+            "severity": "High",
+            "service": "AwsS3Bucket",
+            "date_first_discovered": "Unknown",
+            "remediation_time": "7 Days",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "Amazon SageMaker notebook instances should not have direct internet access",
+            "severity": "Medium",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:04.397Z",
-            "remediation_time": "Immediate (24h)"
+            "remediation_time": "30 Days",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "EC2 instances should be managed by AWS Systems Manager",
-            "severity": "High",
+            "severity": "Low",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:04.300Z",
-            "remediation_time": "7 Days"
+            "remediation_time": "90 Days",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "EC2 instances managed by Systems Manager should have an association compliance status of COMPLIANT",
-            "severity": "High",
+            "severity": "Low",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:04.349Z",
-            "remediation_time": "7 Days"
+            "remediation_time": "90 Days",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation",
-            "severity": "Medium",
+            "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:04.329Z",
-            "remediation_time": "30 Days"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "S3 general purpose buckets should have block public access settings enabled",
-            "severity": "Low",
+            "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:40:32.398Z",
-            "remediation_time": "90 Days"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "S3 general purpose buckets should require requests to use SSL",
-            "severity": "Low",
+            "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:40:32.355Z",
-            "remediation_time": "90 Days"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "S3 general purpose buckets should use cross-Region replication",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:50:59.862Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "S3 general purpose buckets should block public read access",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:07.503Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "S3 general purpose buckets should block public write access",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:07.528Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "Amazon Redshift clusters should prohibit public access",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:07.174Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "RDS DB Instances should prohibit public access, as determined by the PubliclyAccessible configuration",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:06.608Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "RDS snapshot should be private",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:18.603Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "OpenSearch domains should have encryption at rest enabled",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:18.266Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "OpenSearch domains should not be publicly accessible",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:18.340Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "Lambda functions should be in a VPC",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:50:11.369Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "Lambda function policies should prohibit public access",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:43:17.501Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
             "title": "AWS KMS key rotation should be enabled",
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-12T23:40:09.293Z",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Password policies for IAM users should have strong configurations",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-12T23:59:42.841Z",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Unused IAM user credentials should be removed",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-12T23:40:09.023Z",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "MFA should be enabled for all IAM users",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-12T23:50:10.458Z",
-            "remediation_time": "Best Effort"
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         }
     ]
 }
