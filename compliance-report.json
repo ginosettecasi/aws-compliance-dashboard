@@ -1,164 +1,164 @@
 {
     "findings": [
         {
-            "title": "AWS Config should be enabled and use the service-linked role for resource recording",
-            "severity": "CRITICAL",
+            "title": "EC2 instances managed by Systems Manager should have an association compliance status of COMPLIANT",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "A log metric filter and alarm should exist for usage of the \"root\" user",
-            "severity": "LOW",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "EC2 instances should be managed by AWS Systems Manager",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "Amazon SQS queues should be encrypted at rest",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "SNS topics should be encrypted at-rest using AWS KMS",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "S3 general purpose buckets should have server access logging enabled",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "S3 general purpose buckets should block public access",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should use cross-Region replication",
-            "severity": "INFORMATIONAL",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "S3 general purpose bucket policies should restrict access to other AWS accounts",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "S3 general purpose buckets should require requests to use SSL",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "S3 general purpose buckets should block public write access",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
-        },
-        {
-            "title": "S3 general purpose buckets should have MFA delete enabled",
-            "severity": "INFORMATIONAL",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should block public read access",
-            "severity": "INFORMATIONAL",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "S3 access points should have block public access settings enabled",
-            "severity": "INFORMATIONAL",
+            "title": "Lambda function policies should prohibit public access",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "S3 general purpose buckets should be encrypted at rest with AWS KMS keys",
-            "severity": "INFORMATIONAL",
+            "title": "AWS KMS key rotation should be enabled",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "S3 general purpose buckets should have Object Lock enabled",
-            "severity": "INFORMATIONAL",
+            "title": "Unused IAM user credentials should be removed",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "S3 general purpose buckets should have versioning enabled",
-            "severity": "INFORMATIONAL",
+            "title": "CodeBuild Bitbucket source repository URLs should not contain sensitive credentials",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "S3 general purpose buckets should have Lifecycle configurations",
-            "severity": "INFORMATIONAL",
+            "title": "CloudTrail log file validation should be enabled",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "ACLs should not be used to manage user access to S3 general purpose buckets",
-            "severity": "INFORMATIONAL",
+            "title": "At least one CloudTrail trail should be enabled",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         },
         {
-            "title": "S3 general purpose buckets should have event notifications enabled",
-            "severity": "INFORMATIONAL",
+            "title": "Auto scaling groups associated with a load balancer should use ELB health checks",
+            "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 3 more",
-            "full_compliance_standards": "ISO 27001, SOC 2 Type II, FedRAMP, CIS Controls",
-            "remediation_time": "90 Days (Default)"
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "ECS services should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "EC2 transit gateways should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "EC2 VPN gateways should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "Amazon VPC peering connections should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "Amazon VPC flow logs should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "Amazon VPC endpoint services should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "Amazon VPCs should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "EC2 volumes should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "EC2 subnets should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
+        },
+        {
+            "title": "EC2 security groups should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "ISO 27001 + 4 more",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
+            "remediation_time": "Best Effort"
         }
     ]
 }
