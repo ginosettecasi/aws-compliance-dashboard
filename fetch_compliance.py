@@ -20,6 +20,22 @@ REMEDIATION_TIME = {
     "Informational": "Best Effort",
 }
 
+# **Predefined Compliance Frameworks for Each Finding**
+COMPLIANCE_STANDARDS = {
+    "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP", "PCI DSS"],
+    "Root Account Has Active Keys": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP"],
+    "CloudTrail Not Enabled": ["CIS Controls", "ISO 27001", "SOC 2 Type II", "FedRAMP", "PCI DSS"],
+    "IAM User Without MFA": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP", "CIS Controls"],
+    "EC2 Security Group Allows All Traffic": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP", "CIS Controls"],
+    "IAM Policy Allows Full Admin Access": ["SOC 2 Type II", "ISO 27001", "FedRAMP", "CIS Controls", "PCI DSS"],
+    "Unencrypted EBS Volume": ["PCI DSS", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
+    "RDS Publicly Accessible": ["ISO 27001", "CIS Controls", "SOC 2 Type II", "FedRAMP", "PCI DSS"],
+    "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
+}
+
+# **Default Compliance Standards if a finding isn’t explicitly mapped**
+DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls", "PCI DSS"]
+
 # **Timestamp for Compliance Report**
 report_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d")
 
@@ -46,12 +62,25 @@ try:
 
         remediation_time = REMEDIATION_TIME.get(severity, "Best Effort")
 
+        # **Assign Compliance Frameworks**
+        compliance_frameworks = COMPLIANCE_STANDARDS.get(title, DEFAULT_COMPLIANCE_STANDARDS)
+
+        # **Format for Display**
+        if len(compliance_frameworks) > 1:
+            compliance_text = f"{compliance_frameworks[0]} + {len(compliance_frameworks) - 1}"
+            compliance_hover_text = "\n".join(compliance_frameworks)  # Full list for tooltip
+        else:
+            compliance_text = compliance_frameworks[0]
+            compliance_hover_text = compliance_frameworks[0]
+
         findings.append({
             "title": title,
             "severity": severity,  # Forced severity assignment
             "service": service,
             "date_first_discovered": first_observed_at,  # Keep AWS Format
-            "remediation_time": remediation_time
+            "remediation_time": remediation_time,
+            "compliance_standard": compliance_text,  # Display "Framework + X"
+            "full_compliance_standards": compliance_hover_text  # Tooltip text
         })
 
     compliance_report = {"timestamp": report_timestamp, "findings": findings}
