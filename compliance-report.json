@@ -1,164 +1,185 @@
 {
+    "timestamp": "2025-02-13 00:34:46 UTC",
     "findings": [
+        {
+            "title": "Amazon SageMaker notebook instances should not have direct internet access",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "EC2 instances should be managed by AWS Systems Manager",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
         {
             "title": "EC2 instances managed by Systems Manager should have an association compliance status of COMPLIANT",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "S3 general purpose buckets should have block public access settings enabled",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "S3 general purpose buckets should require requests to use SSL",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         },
         {
             "title": "S3 general purpose buckets should use cross-Region replication",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         },
         {
             "title": "S3 general purpose buckets should block public read access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "S3 general purpose buckets should block public write access",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "Amazon Redshift clusters should prohibit public access",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "RDS DB Instances should prohibit public access, as determined by the PubliclyAccessible configuration",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "RDS snapshot should be private",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "OpenSearch domains should have encryption at rest enabled",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "OpenSearch domains should not be publicly accessible",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "Lambda functions should be in a VPC",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         },
         {
             "title": "Lambda function policies should prohibit public access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         },
         {
             "title": "AWS KMS key rotation should be enabled",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
+        },
+        {
+            "title": "Password policies for IAM users should have strong configurations",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         },
         {
             "title": "Unused IAM user credentials should be removed",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         },
         {
-            "title": "CodeBuild Bitbucket source repository URLs should not contain sensitive credentials",
+            "title": "MFA should be enabled for all IAM users",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "CloudTrail log file validation should be enabled",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "At least one CloudTrail trail should be enabled",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Auto scaling groups associated with a load balancer should use ELB health checks",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "ECS services should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "EC2 transit gateways should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "EC2 VPN gateways should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Amazon VPC peering connections should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Amazon VPC flow logs should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Amazon VPC endpoint services should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "Amazon VPCs should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "EC2 volumes should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "EC2 subnets should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
-        },
-        {
-            "title": "EC2 security groups should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "compliance_standard": "ISO 27001 + 4 more",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS",
-            "remediation_time": "Best Effort"
+            "compliance_standard": "AWS Best Practices",
+            "full_compliance_standards": "AWS Best Practices",
+            "remediation_time": "Best Effort",
+            "remediation_steps": "Refer to AWS Security Hub documentation."
         }
     ]
 }
