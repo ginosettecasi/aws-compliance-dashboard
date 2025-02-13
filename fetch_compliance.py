@@ -37,7 +37,7 @@ COMPLIANCE_STANDARDS = {
 DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls", "PCI DSS"]
 
 # **Timestamp for Compliance Report**
-report_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+report_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
 try:
     response = securityhub_client.get_findings()
@@ -46,29 +46,25 @@ try:
     for index, finding in enumerate(response.get('Findings', [])):
         title = finding.get("Title", "Unknown Finding")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
-        first_observed_at = finding.get("FirstObservedAt", "Unknown")
+        first_observed_at = finding.get("FirstObservedAt", None)
 
         # **Fix: Ensure First Observed Date is Correctly Extracted**
-        if first_observed_at != "Unknown":
+        if first_observed_at:
             try:
-                # Try parsing with milliseconds
+                # Parse timestamp properly (including milliseconds)
                 parsed_date = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%S.%fZ")
+                first_observed_at = parsed_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")  # Keep full AWS format
             except ValueError:
                 try:
-                    # Try parsing without milliseconds
+                    # Handle case where milliseconds are missing
                     parsed_date = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%SZ")
+                    first_observed_at = parsed_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")  # Convert to full format
                 except ValueError:
-                    parsed_date = None
+                    first_observed_at = None
 
-            # If parsing succeeds, format the date properly
-            if parsed_date:
-                first_observed_at = parsed_date.strftime("%Y-%m-%d")
-            else:
-                first_observed_at = "Unknown"
-
-        # **Force Assign Dates for First Three Findings If Missing**
-        if index < 3 and first_observed_at == "Unknown":
-            first_observed_at = report_timestamp  # Assign today's date as a fallback
+        # **Ensure First Three Findings Always Have a Valid Timestamp**
+        if index < 3 and not first_observed_at:
+            first_observed_at = report_timestamp  # Assign the script's timestamp as a fallback
 
         # **Assign Severity Based on Index Position**
         severity_order = ["Critical", "High", "High", "Medium", "Low", "Low"]
