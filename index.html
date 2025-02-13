@@ -16,7 +16,7 @@
         }
         .container {
             width: 90%;
-            max-width: 1400px; /* Increased width */
+            max-width: 1400px;
             margin: auto;
             background: #1e1e2e;
             padding: 20px;
@@ -61,10 +61,7 @@
         <h1>🔒 AWS Compliance Dashboard</h1>
         <p><strong>Last Updated:</strong> <span id="last-updated">Loading...</span></p>
 
-        <!-- Compliance Overview Charts -->
-        <div class="chart-container">
-            <canvas id="complianceChart"></canvas>
-        </div>
+        <!-- Compliance Overview Chart -->
         <div class="chart-container">
             <canvas id="remediationChart"></canvas>
         </div>
@@ -76,12 +73,13 @@
                     <th>Severity</th>
                     <th>Service</th>
                     <th>Compliance Standard</th>
+                    <th>Date First Discovered</th>
                     <th>Remediation Timeframe</th>
                     <th>Recommended Remediation</th>
                 </tr>
             </thead>
             <tbody id="compliance-data">
-                <tr><td colspan="6">Loading compliance data...</td></tr>
+                <tr><td colspan="7">Loading compliance data...</td></tr>
             </tbody>
         </table>
     </div>
@@ -100,11 +98,9 @@
 
                 tableBody.innerHTML = "";
 
-                const severityCounts = { Critical: 0, High: 0, Medium: 0, Low: 0, Informational: 0 };
                 const remediationCounts = { "Immediate (24h)": 0, "7 Days": 0, "30 Days": 0, "90 Days": 0, "Best Effort": 0 };
 
                 const rows = data.findings.map(finding => {
-                    severityCounts[finding.severity]++;
                     remediationCounts[finding.remediation_time]++;
 
                     return `<tr>
@@ -112,6 +108,7 @@
                         <td class="${finding.severity.toLowerCase()}">${finding.severity}</td>
                         <td>${finding.service}</td>
                         <td>${finding.compliance_standard}</td>
+                        <td>${finding.date_first_discovered || "Unknown"}</td>
                         <td>${finding.remediation_time}</td>
                         <td>${finding.remediation_steps || "Refer to AWS Security Hub."}</td>
                     </tr>`;
@@ -120,29 +117,9 @@
                 tableBody.innerHTML = rows.join("");
                 lastUpdated.textContent = new Date().toLocaleString();
 
-                // Compliance Chart
-                const ctx1 = document.getElementById('complianceChart').getContext('2d');
-                new Chart(ctx1, {
-                    type: 'bar',
-                    data: {
-                        labels: ["Critical", "High", "Medium", "Low", "Informational"],
-                        datasets: [{
-                            label: 'Findings by Severity',
-                            data: [
-                                severityCounts.Critical, 
-                                severityCounts.High, 
-                                severityCounts.Medium, 
-                                severityCounts.Low, 
-                                severityCounts.Informational
-                            ],
-                            backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50', '#777']
-                        }]
-                    }
-                });
-
                 // Remediation Chart
-                const ctx2 = document.getElementById('remediationChart').getContext('2d');
-                new Chart(ctx2, {
+                const ctx = document.getElementById('remediationChart').getContext('2d');
+                new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ["Immediate (24h)", "7 Days", "30 Days", "90 Days", "Best Effort"],
@@ -162,7 +139,7 @@
 
             } catch (error) {
                 console.error("Error loading compliance-report.json:", error);
-                document.getElementById("compliance-data").innerHTML = "<tr><td colspan='6'>⚠️ Error loading data.</td></tr>";
+                document.getElementById("compliance-data").innerHTML = "<tr><td colspan='7'>⚠️ Error loading data.</td></tr>";
             }
         });
     </script>
