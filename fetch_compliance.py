@@ -12,19 +12,19 @@ securityhub_client = boto3.client('securityhub', region_name="us-east-2")
 
 # Standard compliance frameworks used in AWS Security Hub
 COMPLIANCE_STANDARDS = {
-    "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP"],
+    "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP", "PCI DSS"],
     "Root Account Has Active Keys": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP"],
-    "CloudTrail Not Enabled": ["CIS Controls", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
+    "CloudTrail Not Enabled": ["CIS Controls", "ISO 27001", "SOC 2 Type II", "FedRAMP", "PCI DSS"],
     "IAM User Without MFA": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP", "CIS Controls"],
     "EC2 Security Group Allows All Traffic": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP", "CIS Controls"],
-    "IAM Policy Allows Full Admin Access": ["SOC 2 Type II", "ISO 27001", "FedRAMP", "CIS Controls"],
+    "IAM Policy Allows Full Admin Access": ["SOC 2 Type II", "ISO 27001", "FedRAMP", "CIS Controls", "PCI DSS"],
     "Unencrypted EBS Volume": ["PCI DSS", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
-    "RDS Publicly Accessible": ["ISO 27001", "CIS Controls", "SOC 2 Type II", "FedRAMP"],
+    "RDS Publicly Accessible": ["ISO 27001", "CIS Controls", "SOC 2 Type II", "FedRAMP", "PCI DSS"],
     "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
 }
 
-# Default compliance standards if not mapped explicitly
-DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls"]
+# Default compliance standards if not explicitly mapped (Now includes PCI DSS)
+DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls", "PCI DSS"]
 
 # Remediation Timeframe Mapping (Industry Best Practices)
 REMEDIATION_TIME = {
@@ -62,7 +62,7 @@ try:
             "severity": severity,
             "service": service,
             "compliance_standard": compliance_text,
-            "full_compliance_standards": ", ".join(compliance_standards),  # Keep full standards for future expansion
+            "full_compliance_standards": ", ".join(compliance_standards),  # Keep full standards for tooltip
             "remediation_time": remediation_time
         })
 
