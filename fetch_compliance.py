@@ -42,9 +42,20 @@ try:
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
         first_observed_at = finding.get("FirstObservedAt", "Unknown")
 
-        # **Format Date as YYYY-MM-DD**
+        # **Fix: Handle timestamps with milliseconds while ensuring proper format**
+        full_timestamp = "Unknown"
+        formatted_date = "Unknown"
+
         if first_observed_at != "Unknown":
-            first_observed_at = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d")
+            try:
+                # Convert full timestamp, including milliseconds
+                full_timestamp = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%S.%fZ")
+            except ValueError:
+                # Fallback if AWS returns timestamp without milliseconds
+                full_timestamp = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%SZ")
+
+            # Extract and store only the date (YYYY-MM-DD) for UI display
+            formatted_date = full_timestamp.strftime("%Y-%m-%d")
 
         severity = CUSTOM_SEVERITIES.get(title, "Informational")
         remediation_time = REMEDIATION_TIME.get(severity, "Best Effort")
@@ -53,7 +64,8 @@ try:
             "title": title,
             "severity": severity,
             "service": service,
-            "date_first_discovered": first_observed_at,
+            "date_first_discovered": formatted_date,  # Display only date (YYYY-MM-DD)
+            "full_timestamp": full_timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ") if full_timestamp != "Unknown" else "Unknown",  # Store full timestamp for accuracy
             "remediation_time": remediation_time
         })
 
