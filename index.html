@@ -12,15 +12,17 @@
             color: #ffffff;
             text-align: center;
             padding: 20px;
+            margin: 0;
         }
         .container {
-            max-width: 1100px;
+            width: 90%;
+            max-width: 1400px; /* Increased width to fit large screens */
             margin: auto;
             background: #1e1e2e;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
-            overflow-x: auto;
+            overflow: hidden; /* Prevents horizontal scrolling */
         }
         h1 { color: #ffcc00; }
         p { font-size: 14px; color: #bbb; }
@@ -30,13 +32,15 @@
             margin-top: 20px;
             background: #29293d;
             border-radius: 8px;
+            table-layout: fixed; /* Ensures even column spacing */
         }
         th, td {
             border: 1px solid #444;
             padding: 12px;
             text-align: left;
             position: relative;
-            white-space: nowrap;
+            white-space: normal; /* Allow text wrapping instead of forcing a scrollbar */
+            word-wrap: break-word; /* Ensures content fits inside cells */
         }
         th {
             background-color: #ffcc00;
@@ -46,31 +50,10 @@
         .medium { background-color: #ffcc00; color: black; }
         .low { background-color: #4CAF50; color: white; }
         .critical { background-color: #990000; color: white; }
-        .tooltip {
-            display: none;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-            font-size: 14px;
-            white-space: pre-line;
-            text-align: left;
-            z-index: 10;
-        }
-        td:hover .tooltip {
-            display: block;
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: max-content;
-            max-width: 300px;
-        }
         .chart-container {
             margin: 20px auto;
             width: 90%;
-            max-width: 800px;
+            max-width: 1000px;
         }
     </style>
 </head>
@@ -124,9 +107,7 @@
                         <td class="${finding.severity.toLowerCase()}">${finding.severity}</td>
                         <td>${finding.service}</td>
                         <td>${finding.compliance_standard}</td>
-                        <td>
-                            <span class="tooltip">${finding.remediation_steps || "Refer to AWS Security Hub."}</span>
-                        </td>
+                        <td>${finding.remediation_steps || "Refer to AWS Security Hub."}</td>
                     </tr>`;
                 });
 
