@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AWS Compliance Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,12 +14,13 @@
             padding: 20px;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: auto;
             background: #1e1e2e;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
         }
         h1 { color: #ffcc00; }
         p { font-size: 14px; color: #bbb; }
@@ -28,13 +30,13 @@
             margin-top: 20px;
             background: #29293d;
             border-radius: 8px;
-            overflow: hidden;
         }
         th, td {
             border: 1px solid #444;
             padding: 12px;
             text-align: left;
             position: relative;
+            white-space: nowrap;
         }
         th {
             background-color: #ffcc00;
@@ -44,8 +46,6 @@
         .medium { background-color: #ffcc00; color: black; }
         .low { background-color: #4CAF50; color: white; }
         .critical { background-color: #990000; color: white; }
-
-        /* Tooltip Styling */
         .tooltip {
             display: none;
             position: absolute;
@@ -54,19 +54,23 @@
             padding: 8px;
             border-radius: 5px;
             font-size: 14px;
-            white-space: pre-line;  /* Enables multi-line formatting */
+            white-space: pre-line;
             text-align: left;
             z-index: 10;
         }
         td:hover .tooltip {
             display: block;
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             width: max-content;
             max-width: 300px;
-            z-index: 10;
+        }
+        .chart-container {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
         }
     </style>
 </head>
@@ -75,6 +79,11 @@
         <h1>🔒 AWS Compliance Dashboard</h1>
         <p><strong>Last Updated:</strong> <span id="last-updated">Loading...</span></p>
 
+        <!-- Compliance Overview Charts -->
+        <div class="chart-container">
+            <canvas id="complianceChart"></canvas>
+        </div>
+
         <table id="compliance-table">
             <thead>
                 <tr>
@@ -82,7 +91,7 @@
                     <th>Severity</th>
                     <th>Service</th>
                     <th>Compliance Standard</th>
-                    <th>Remediation Timeframe</th>
+                    <th>Recommended Remediation</th>
                 </tr>
             </thead>
             <tbody id="compliance-data">
@@ -92,41 +101,56 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('compliance-report.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to load compliance-report.json");
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    let tableBody = document.getElementById('compliance-data');
-                    let lastUpdated = document.getElementById('last-updated');
+        document.addEventListener("DOMContentLoaded", async function () {
+            try {
+                const response = await fetch('compliance-report.json');
+                if (!response.ok) {
+                    throw new Error("Failed to load compliance-report.json");
+                }
 
-                    tableBody.innerHTML = "";
-                    data.findings.forEach(finding => {
-                        let severityClass = finding.severity.toLowerCase().replace(" ", "-");
+                const data = await response.json();
+                const tableBody = document.getElementById('compliance-data');
+                const lastUpdated = document.getElementById('last-updated');
 
-                        let row = `<tr>
-                            <td>${finding.title}</td>
-                            <td class="${severityClass}">${finding.severity}</td>
-                            <td>${finding.service}</td>
-                            <td>
-                                ${finding.compliance_standard}
-                                <span class="tooltip">${finding.full_compliance_standards}</span>
-                            </td>
-                            <td>${finding.remediation_time}</td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
-                    });
+                tableBody.innerHTML = "";
 
-                    lastUpdated.textContent = new Date().toLocaleString();
-                })
-                .catch(error => {
-                    console.error("Error loading compliance-report.json:", error);
-                    document.getElementById("compliance-data").innerHTML = "<tr><td colspan='5'>Error loading data.</td></tr>";
+                const severityCounts = { Critical: 0, High: 0, Medium: 0, Low: 0 };
+
+                const rows = data.findings.map(finding => {
+                    severityCounts[finding.severity]++;
+
+                    return `<tr>
+                        <td>${finding.title}</td>
+                        <td class="${finding.severity.toLowerCase()}">${finding.severity}</td>
+                        <td>${finding.service}</td>
+                        <td>${finding.compliance_standard}</td>
+                        <td>
+                            <span class="tooltip">${finding.remediation_steps || "Refer to AWS Security Hub."}</span>
+                        </td>
+                    </tr>`;
                 });
+
+                tableBody.innerHTML = rows.join("");
+                lastUpdated.textContent = new Date().toLocaleString();
+
+                // Update Compliance Chart
+                const ctx = document.getElementById('complianceChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Critical", "High", "Medium", "Low"],
+                        datasets: [{
+                            label: 'Compliance Findings by Severity',
+                            data: [severityCounts.Critical, severityCounts.High, severityCounts.Medium, severityCounts.Low],
+                            backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50']
+                        }]
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error loading compliance-report.json:", error);
+                document.getElementById("compliance-data").innerHTML = "<tr><td colspan='5'>⚠️ Error loading data.</td></tr>";
+            }
         });
     </script>
 </body>
