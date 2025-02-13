@@ -127,7 +127,7 @@ This project **demonstrates** my **ability to lead security compliance initiativ
 - Integrated **Infrastructure-as-Code (IaC) security audits**.  
 - Enabled **real-time compliance visibility for security teams**.
 
-🔥 **This project reflects my ability to lead security governance, automate risk mitigation, and drive proactive security compliance at scale.** 🔥
+🔥 **This project reflects my ability to lead security governance, automate risk mitigation, and drive proactive security compliance at scale.** 
 
 ## 🤝 Connect With Me
 
