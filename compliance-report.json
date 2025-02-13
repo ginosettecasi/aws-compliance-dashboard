@@ -1,185 +1,165 @@
 {
-    "timestamp": "2025-02-13 00:41:19 UTC",
+    "timestamp": "2025-02-13",
     "findings": [
         {
             "title": "Amazon SageMaker notebook instances should not have direct internet access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:04.397000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "EC2 instances should be managed by AWS Systems Manager",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:04.300000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "EC2 instances managed by Systems Manager should have an association compliance status of COMPLIANT",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:04.349000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "EC2 instances managed by Systems Manager should have a patch compliance status of COMPLIANT after a patch installation",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:04.329000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should have block public access settings enabled",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:40:32.398000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should require requests to use SSL",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:40:32.355000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should use cross-Region replication",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:50:59.862000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should block public read access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:07.503000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "S3 general purpose buckets should block public write access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:07.528000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "Amazon Redshift clusters should prohibit public access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:07.174000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "RDS DB Instances should prohibit public access, as determined by the PubliclyAccessible configuration",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:06.608000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "RDS snapshot should be private",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:18.603000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "OpenSearch domains should have encryption at rest enabled",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:18.266000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "OpenSearch domains should not be publicly accessible",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:18.340000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "Lambda functions should be in a VPC",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:50:11.369000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "Lambda function policies should prohibit public access",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:43:17.501000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "AWS KMS key rotation should be enabled",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:40:09.293000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "Password policies for IAM users should have strong configurations",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:59:42.841000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "Unused IAM user credentials should be removed",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:40:09.023000Z",
+            "remediation_time": "Best Effort"
         },
         {
             "title": "MFA should be enabled for all IAM users",
             "severity": "Informational",
             "service": "AwsAccount",
-            "compliance_standard": "AWS Best Practices",
-            "full_compliance_standards": "AWS Best Practices",
-            "remediation_time": "Best Effort",
-            "remediation_steps": "Refer to AWS Security Hub documentation."
+            "date_first_discovered": "2025-02-12",
+            "full_timestamp": "2025-02-12T23:50:10.458000Z",
+            "remediation_time": "Best Effort"
         }
     ]
 }
