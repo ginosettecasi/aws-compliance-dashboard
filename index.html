@@ -128,9 +128,9 @@
                 const rows = data.findings.map(finding => {
                     remediationCounts[finding.remediation_time]++;
 
-                    // Check if compliance data exists
+                    // Ensure compliance data is correctly formatted
                     let complianceContent = finding.compliance_standard || "Unknown";
-                    let complianceTooltip = finding.full_compliance_standards || "No additional details";
+                    let complianceTooltip = finding.full_compliance_standards || "No additional details available.";
 
                     return `<tr>
                         <td>${finding.title}</td>
