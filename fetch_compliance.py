@@ -30,27 +30,7 @@ try:
     for index, finding in enumerate(response.get('Findings', [])):
         title = finding.get("Title", "Unknown Finding")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
-        first_observed_at = finding.get("FirstObservedAt", "Unknown")
-
-        # **Fix: Handle timestamps with or without milliseconds**
-        full_timestamp = "Unknown"
-        formatted_date = "Unknown"
-
-        if first_observed_at != "Unknown":
-            try:
-                # Try parsing with milliseconds
-                full_timestamp = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%S.%fZ")
-            except ValueError:
-                try:
-                    # If that fails, try parsing without milliseconds
-                    full_timestamp = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%SZ")
-                except ValueError as e:
-                    print(f"⚠️ WARNING: Failed to parse timestamp '{first_observed_at}': {e}")
-                    full_timestamp = "Unknown"
-
-            # Extract only the date (YYYY-MM-DD) for UI display
-            if full_timestamp != "Unknown":
-                formatted_date = full_timestamp.strftime("%Y-%m-%d")
+        first_observed_at = finding.get("FirstObservedAt", "Unknown")  # Keep AWS Format
 
         # **Assign Severity Based on Index Position**
         if index == 0:
@@ -70,8 +50,7 @@ try:
             "title": title,
             "severity": severity,  # Forced severity assignment
             "service": service,
-            "date_first_discovered": formatted_date,  # Display only YYYY-MM-DD
-            "full_timestamp": full_timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ") if full_timestamp != "Unknown" else "Unknown",  # Store full timestamp for accuracy
+            "date_first_discovered": first_observed_at,  # Keep AWS Format
             "remediation_time": remediation_time
         })
 
