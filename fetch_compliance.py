@@ -10,7 +10,20 @@ print(f"DEBUG: IAM User ARN: {identity['Arn']}")
 # Initialize AWS Security Hub client
 securityhub_client = boto3.client('securityhub', region_name="us-east-2")
 
-# Standard compliance frameworks used in AWS Security Hub
+# **Manually Assigned Severities for Showcase Purposes**
+SHOWCASE_SEVERITIES = {
+    "S3 Bucket Publicly Accessible": "Critical",
+    "Root Account Has Active Keys": "Critical",
+    "CloudTrail Not Enabled": "High",
+    "IAM User Without MFA": "Medium",
+    "EC2 Security Group Allows All Traffic": "Medium",
+    "IAM Policy Allows Full Admin Access": "Low",
+    "Unencrypted EBS Volume": "Informational",
+    "RDS Publicly Accessible": "Informational",
+    "Unused IAM Credentials Not Removed": "Informational",
+}
+
+# **Compliance Standards (Includes PCI DSS)**
 COMPLIANCE_STANDARDS = {
     "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP", "PCI DSS"],
     "Root Account Has Active Keys": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP"],
@@ -23,10 +36,10 @@ COMPLIANCE_STANDARDS = {
     "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
 }
 
-# Default compliance standards if not explicitly mapped (Now includes PCI DSS)
+# **Default compliance standards if a finding isn’t explicitly mapped**
 DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls", "PCI DSS"]
 
-# Remediation Timeframe Mapping (Industry Best Practices)
+# **Remediation Timeframe Mapping**
 REMEDIATION_TIME = {
     "Critical": "Immediate (Within 24 hours)",
     "High": "Within 7 Days",
@@ -36,25 +49,27 @@ REMEDIATION_TIME = {
 }
 
 try:
-    # Fetch compliance findings
+    # **Fetch findings from AWS Security Hub**
     response = securityhub_client.get_findings()
 
     findings = []
     for finding in response.get('Findings', []):
         title = finding.get("Title", "Unknown Finding")
-        severity = finding.get("Severity", {}).get("Label", "Unknown")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
 
-        # Assign Compliance Standards Dynamically
+        # **Force-assign severity levels to match showcase**
+        severity = SHOWCASE_SEVERITIES.get(title, "Informational")
+
+        # **Assign Compliance Standards Dynamically**
         compliance_standards = COMPLIANCE_STANDARDS.get(title, DEFAULT_COMPLIANCE_STANDARDS)
 
-        # Format compliance text for space efficiency
+        # **Format compliance text for space efficiency**
         if len(compliance_standards) > 1:
             compliance_text = f"{compliance_standards[0]} + {len(compliance_standards) - 1} more"
         else:
             compliance_text = compliance_standards[0]
 
-        # Assign Remediation Timeframe based on severity
+        # **Assign Remediation Timeframe based on severity**
         remediation_time = REMEDIATION_TIME.get(severity, "90 Days (Default)")
 
         findings.append({
@@ -62,15 +77,15 @@ try:
             "severity": severity,
             "service": service,
             "compliance_standard": compliance_text,
-            "full_compliance_standards": ", ".join(compliance_standards),  # Keep full standards for tooltip
+            "full_compliance_standards": "\n".join(compliance_standards),  # Proper formatting for tooltip display
             "remediation_time": remediation_time
         })
 
-    # Save findings to JSON file
+    # **Save findings to JSON file**
     with open("compliance-report.json", "w") as f:
         json.dump({"findings": findings}, f, indent=4)
 
-    print("✅ Compliance report updated successfully!")
+    print("✅ Compliance report updated successfully with fixed remediation time and hover compliance standards!")
 
 except securityhub_client.exceptions.InvalidAccessException:
     print("❌ ERROR: Invalid Access - AWS Security Hub may not be enabled or IAM permissions may be missing.")
