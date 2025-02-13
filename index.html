@@ -16,13 +16,13 @@
         }
         .container {
             width: 90%;
-            max-width: 1400px; /* Increased width to fit large screens */
+            max-width: 1400px;
             margin: auto;
             background: #1e1e2e;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
-            overflow: hidden; /* Prevents horizontal scrolling */
+            overflow: hidden;
         }
         h1 { color: #ffcc00; }
         p { font-size: 14px; color: #bbb; }
@@ -32,15 +32,15 @@
             margin-top: 20px;
             background: #29293d;
             border-radius: 8px;
-            table-layout: fixed; /* Ensures even column spacing */
+            table-layout: fixed;
         }
         th, td {
             border: 1px solid #444;
             padding: 12px;
             text-align: left;
             position: relative;
-            white-space: normal; /* Allow text wrapping instead of forcing a scrollbar */
-            word-wrap: break-word; /* Ensures content fits inside cells */
+            white-space: normal;
+            word-wrap: break-word;
         }
         th {
             background-color: #ffcc00;
@@ -75,10 +75,11 @@
                     <th>Service</th>
                     <th>Compliance Standard</th>
                     <th>Recommended Remediation</th>
+                    <th>Remediation Timeframe (FedRAMP)</th>
                 </tr>
             </thead>
             <tbody id="compliance-data">
-                <tr><td colspan="5">Loading compliance data...</td></tr>
+                <tr><td colspan="6">Loading compliance data...</td></tr>
             </tbody>
         </table>
     </div>
@@ -98,9 +99,11 @@
                 tableBody.innerHTML = "";
 
                 const severityCounts = { Critical: 0, High: 0, Medium: 0, Low: 0 };
+                const remediationTimeframes = { Critical: 0, High: 0, Medium: 0, Low: 0 };
 
                 const rows = data.findings.map(finding => {
                     severityCounts[finding.severity]++;
+                    remediationTimeframes[finding.severity]++;
 
                     return `<tr>
                         <td>${finding.title}</td>
@@ -108,6 +111,7 @@
                         <td>${finding.service}</td>
                         <td>${finding.compliance_standard}</td>
                         <td>${finding.remediation_steps || "Refer to AWS Security Hub."}</td>
+                        <td>${finding.remediation_time}</td>
                     </tr>`;
                 });
 
@@ -120,17 +124,24 @@
                     type: 'bar',
                     data: {
                         labels: ["Critical", "High", "Medium", "Low"],
-                        datasets: [{
-                            label: 'Compliance Findings by Severity',
-                            data: [severityCounts.Critical, severityCounts.High, severityCounts.Medium, severityCounts.Low],
-                            backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50']
-                        }]
+                        datasets: [
+                            {
+                                label: 'Findings by Severity',
+                                data: [severityCounts.Critical, severityCounts.High, severityCounts.Medium, severityCounts.Low],
+                                backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50']
+                            },
+                            {
+                                label: 'Findings by FedRAMP Remediation Timeframe',
+                                data: [remediationTimeframes.Critical, remediationTimeframes.High, remediationTimeframes.Medium, remediationTimeframes.Low],
+                                backgroundColor: ['#660000', '#b30000', '#b38f00', '#2d7d2d']
+                            }
+                        ]
                     }
                 });
 
             } catch (error) {
                 console.error("Error loading compliance-report.json:", error);
-                document.getElementById("compliance-data").innerHTML = "<tr><td colspan='5'>⚠️ Error loading data.</td></tr>";
+                document.getElementById("compliance-data").innerHTML = "<tr><td colspan='6'>⚠️ Error loading data.</td></tr>";
             }
         });
     </script>
