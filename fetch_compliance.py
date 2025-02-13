@@ -20,7 +20,7 @@ REMEDIATION_TIME = {
     "Informational": "Best Effort",
 }
 
-# **Predefined Compliance Frameworks for Each Finding**
+# **Compliance Standards for Each Finding**
 COMPLIANCE_STANDARDS = {
     "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP", "PCI DSS"],
     "Root Account Has Active Keys": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP"],
@@ -49,17 +49,9 @@ try:
         first_observed_at = finding.get("FirstObservedAt", "Unknown")  # Keep AWS Format
 
         # **Assign Severity Based on Index Position**
-        if index == 0:
-            severity = "Critical"
-        elif index in [1, 2]:
-            severity = "High"
-        elif index == 3:
-            severity = "Medium"
-        elif index in [4, 5]:
-            severity = "Low"
-        else:
-            severity = "Informational"
-
+        severity_order = ["Critical", "High", "High", "Medium", "Low", "Low"]
+        severity = severity_order[index] if index < len(severity_order) else "Informational"
+        
         remediation_time = REMEDIATION_TIME.get(severity, "Best Effort")
 
         # **Assign Compliance Frameworks**
@@ -75,12 +67,12 @@ try:
 
         findings.append({
             "title": title,
-            "severity": severity,  # Forced severity assignment
+            "severity": severity,
             "service": service,
-            "date_first_discovered": first_observed_at,  # Keep AWS Format
+            "date_first_discovered": first_observed_at,
             "remediation_time": remediation_time,
-            "compliance_standard": compliance_text,  # Display "Framework + X"
-            "full_compliance_standards": compliance_hover_text  # Tooltip text
+            "compliance_standard": compliance_text,
+            "full_compliance_standards": compliance_hover_text
         })
 
     compliance_report = {"timestamp": report_timestamp, "findings": findings}
