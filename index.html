@@ -52,8 +52,8 @@
         .critical { background-color: #990000; color: white; }
         .chart-container {
             margin: 20px auto;
-            width: 90%;
-            max-width: 1000px;
+            width: 85%; /* Slightly reduced width */
+            max-width: 900px; /* Slightly smaller than before */
         }
 
         /* Tooltip Styling */
@@ -164,6 +164,30 @@
 
                 tableBody.innerHTML = rows.join("");
                 lastUpdated.textContent = new Date().toLocaleString();
+
+                // Restore Bar Chart
+                const ctx = document.getElementById('remediationChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Immediate (24h)", "7 Days", "30 Days", "90 Days", "Best Effort"],
+                        datasets: [{
+                            label: 'Findings by Remediation Timeline',
+                            data: [
+                                remediationCounts["Immediate (24h)"],
+                                remediationCounts["7 Days"],
+                                remediationCounts["30 Days"],
+                                remediationCounts["90 Days"],
+                                remediationCounts["Best Effort"]
+                            ],
+                            backgroundColor: ['#990000', '#ff4d4d', '#ffcc00', '#4CAF50', '#777']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
 
             } catch (error) {
                 console.error("Error loading compliance-report.json:", error);
