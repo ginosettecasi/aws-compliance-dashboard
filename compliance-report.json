@@ -1,173 +1,83 @@
 {
-    "timestamp": "2025-02-22T00:39:48.929698Z",
+    "timestamp": "2025-02-23T00:44:38.138135Z",
     "findings": [
         {
-            "title": "ECS services should be tagged",
+            "title": "AWS KMS key rotation should be enabled",
             "severity": "Critical",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.468000Z",
+            "date_first_discovered": "2025-02-13T22:38:53.041000Z",
             "remediation_time": "Immediate (24h)",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "EC2 transit gateways should be tagged",
+            "title": "CloudTrail should have encryption at-rest enabled",
             "severity": "High",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.450000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.988000Z",
             "remediation_time": "7 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "EC2 VPN gateways should be tagged",
+            "title": "CloudTrail trails should be integrated with Amazon CloudWatch Logs",
             "severity": "High",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.432000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.923000Z",
             "remediation_time": "7 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "Amazon VPC peering connections should be tagged",
+            "title": "CloudTrail log file validation should be enabled",
             "severity": "Medium",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.414000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.869000Z",
             "remediation_time": "30 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "Amazon VPC flow logs should be tagged",
+            "title": "IAM users' access keys should be rotated every 90 days or less",
             "severity": "Low",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.395000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.757000Z",
             "remediation_time": "90 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "Amazon VPC endpoint services should be tagged",
+            "title": "Unused IAM user credentials should be removed",
             "severity": "Low",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.377000Z",
+            "date_first_discovered": "2025-02-13T22:41:21.974000Z",
             "remediation_time": "90 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "EC2 NAT gateways should be tagged",
+            "title": "IAM policies should not allow full \"*\" administrative privileges",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.357000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.780000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "EC2 Elastic IP addresses should be tagged",
+            "title": "MFA should be enabled for all IAM users that have a console password",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.339000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.639000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
         },
         {
-            "title": "EC2 customer gateways should be tagged",
+            "title": "IAM users should not have IAM policies attached",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.320000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "EC2 transit gateway route tables should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.301000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "EC2 transit gateway attachments should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.283000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "DynamoDB tables should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.261000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "Detective behavior graphs should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.242000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "DMS replication subnet groups should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.223000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "DMS replication instances should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.204000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "DMS event subscriptions should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.173000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "DMS certificates should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.154000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "CodeGuru Reviewer repository associations should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.134000Z",
-            "remediation_time": "Best Effort",
-            "compliance_standard": "ISO 27001 + 4",
-            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
-        },
-        {
-            "title": "CodeGuru Profiler profiling groups should be tagged",
-            "severity": "Informational",
-            "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.114000Z",
+            "date_first_discovered": "2025-02-13T22:39:19.601000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -177,6 +87,96 @@
             "severity": "Informational",
             "service": "AwsAccount",
             "date_first_discovered": "2025-02-13T22:48:44.559000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "Redshift cluster subnet groups should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.536000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "Redshift cluster snapshots should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.512000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "Redshift event notification subscriptions should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.476000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "Redshift clusters should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.455000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "RDS DB subnet groups should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.421000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "RDS DB snapshots should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.398000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "RDS DB instances should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.364000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "RDS DB cluster snapshots should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.341000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "RDS DB clusters should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.305000Z",
+            "remediation_time": "Best Effort",
+            "compliance_standard": "ISO 27001 + 4",
+            "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
+        },
+        {
+            "title": "AWS Private CA certificate authorities should be tagged",
+            "severity": "Informational",
+            "service": "AwsAccount",
+            "date_first_discovered": "2025-02-13T22:48:44.284000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
