@@ -11,19 +11,19 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          persist-credentials: false  # Prevents using the default GitHub Actions token
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Install Dependencies
         run: pip install boto3
 
-      - name: Fetch AWS Security Findings
+      - name: Fetch AWS Security Findings (Redacted)
         env:
           AWS_REGION: us-east-2
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -31,12 +31,16 @@ jobs:
         run: |
           python fetch_compliance.py
 
-      - name: Commit and Push Report
+      - name: Verify Compliance Report
+        run: |
+          cat compliance-report.json || (echo "❌ Compliance report missing!" && exit 1)
+
+      - name: Commit and Push Updated Report
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add compliance-report.json
-          git commit -m "Updated compliance report"
+          git commit -m "🔄 Updated compliance report (Redacted Vulnerabilities)"
           git push https://x-access-token:${GH_PAT}@github.com/ginosettecasi/aws-compliance-dashboard.git main
