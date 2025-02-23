@@ -20,20 +20,7 @@ REMEDIATION_TIME = {
     "Informational": "Best Effort",
 }
 
-# **Compliance Standards for Each Finding**
-COMPLIANCE_STANDARDS = {
-    "S3 Bucket Publicly Accessible": ["ISO 27001", "SOC 2 Type II", "CIS Controls", "FedRAMP", "PCI DSS"],
-    "Root Account Has Active Keys": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP"],
-    "CloudTrail Not Enabled": ["CIS Controls", "ISO 27001", "SOC 2 Type II", "FedRAMP", "PCI DSS"],
-    "IAM User Without MFA": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP", "CIS Controls"],
-    "EC2 Security Group Allows All Traffic": ["ISO 27001", "PCI DSS", "SOC 2 Type II", "FedRAMP", "CIS Controls"],
-    "IAM Policy Allows Full Admin Access": ["SOC 2 Type II", "ISO 27001", "FedRAMP", "CIS Controls", "PCI DSS"],
-    "Unencrypted EBS Volume": ["PCI DSS", "ISO 27001", "SOC 2 Type II", "FedRAMP"],
-    "RDS Publicly Accessible": ["ISO 27001", "CIS Controls", "SOC 2 Type II", "FedRAMP", "PCI DSS"],
-    "Unused IAM Credentials Not Removed": ["ISO 27001", "SOC 2 Type II", "PCI DSS", "FedRAMP"],
-}
-
-# **Default Compliance Standards if a finding isn’t explicitly mapped**
+# **Default Compliance Standards**
 DEFAULT_COMPLIANCE_STANDARDS = ["ISO 27001", "SOC 2 Type II", "FedRAMP", "CIS Controls", "PCI DSS"]
 
 # **Timestamp for Compliance Report**
@@ -44,27 +31,27 @@ try:
     findings = []
     
     for index, finding in enumerate(response.get('Findings', [])):
-        title = finding.get("Title", "Unknown Finding")
+        original_title = finding.get("Title", "Unknown Finding")
         service = finding.get("Resources", [{}])[0].get("Type", "Unknown")
         first_observed_at = finding.get("FirstObservedAt", None)
+
+        # **Redact Vulnerability Names for Public Display**
+        title = f"Example Finding - CVE-XXXX-XXXX ({index+1})" if "CVE" in original_title else f"Security Issue {index+1}"
 
         # **Fix: Ensure First Observed Date is Correctly Extracted**
         if first_observed_at:
             try:
-                # Parse timestamp properly (including milliseconds)
                 parsed_date = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%S.%fZ")
-                first_observed_at = parsed_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")  # Keep full AWS format
+                first_observed_at = parsed_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")  
             except ValueError:
                 try:
-                    # Handle case where milliseconds are missing
                     parsed_date = datetime.datetime.strptime(first_observed_at, "%Y-%m-%dT%H:%M:%SZ")
-                    first_observed_at = parsed_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")  # Convert to full format
+                    first_observed_at = parsed_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")  
                 except ValueError:
                     first_observed_at = None
 
-        # **Ensure First Three Findings Always Have a Valid Timestamp**
         if index < 3 and not first_observed_at:
-            first_observed_at = report_timestamp  # Assign the script's timestamp as a fallback
+            first_observed_at = report_timestamp
 
         # **Assign Severity Based on Index Position**
         severity_order = ["Critical", "High", "High", "Medium", "Low", "Low"]
@@ -72,22 +59,21 @@ try:
         
         remediation_time = REMEDIATION_TIME.get(severity, "Best Effort")
 
-        # **Assign Compliance Frameworks**
-        compliance_frameworks = COMPLIANCE_STANDARDS.get(title, DEFAULT_COMPLIANCE_STANDARDS)
+        # **Assign Compliance Frameworks (Use Default Since Titles Are Redacted)**
+        compliance_frameworks = DEFAULT_COMPLIANCE_STANDARDS
 
-        # **Format for Display**
         if len(compliance_frameworks) > 1:
             compliance_text = f"{compliance_frameworks[0]} + {len(compliance_frameworks) - 1}"
-            compliance_hover_text = "\n".join(compliance_frameworks)  # Full list for tooltip
+            compliance_hover_text = "\n".join(compliance_frameworks)
         else:
             compliance_text = compliance_frameworks[0]
             compliance_hover_text = compliance_frameworks[0]
 
         findings.append({
-            "title": title,
+            "title": title,  # Redacted Title
             "severity": severity,
             "service": service,
-            "date_first_discovered": first_observed_at,  # Fixed this issue
+            "date_first_discovered": first_observed_at,
             "remediation_time": remediation_time,
             "compliance_standard": compliance_text,
             "full_compliance_standards": compliance_hover_text
