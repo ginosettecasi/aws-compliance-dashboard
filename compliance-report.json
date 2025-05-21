@@ -1,11 +1,11 @@
 {
-    "timestamp": "2025-05-20T00:49:48.042566Z",
+    "timestamp": "2025-05-21T00:48:40.709841Z",
     "findings": [
         {
             "title": "Security Issue 1",
             "severity": "Critical",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.284000Z",
+            "date_first_discovered": "2025-02-13T22:38:53.041000Z",
             "remediation_time": "Immediate (24h)",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -14,7 +14,7 @@
             "title": "Security Issue 2",
             "severity": "High",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.250000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.988000Z",
             "remediation_time": "7 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -23,7 +23,7 @@
             "title": "Security Issue 3",
             "severity": "High",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.212000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.923000Z",
             "remediation_time": "7 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -32,7 +32,7 @@
             "title": "Security Issue 4",
             "severity": "Medium",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.180000Z",
+            "date_first_discovered": "2025-02-13T22:38:52.869000Z",
             "remediation_time": "30 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -41,7 +41,7 @@
             "title": "Security Issue 5",
             "severity": "Low",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.148000Z",
+            "date_first_discovered": "2025-02-26T22:59:41.297000Z",
             "remediation_time": "90 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -50,7 +50,7 @@
             "title": "Security Issue 6",
             "severity": "Low",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.126000Z",
+            "date_first_discovered": "2025-02-26T22:59:41.345000Z",
             "remediation_time": "90 Days",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -59,7 +59,7 @@
             "title": "Security Issue 7",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.103000Z",
+            "date_first_discovered": "2025-02-26T23:08:05.256000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -68,7 +68,7 @@
             "title": "Security Issue 8",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.049000Z",
+            "date_first_discovered": "2025-02-26T22:59:41.322000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -77,7 +77,7 @@
             "title": "Security Issue 9",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:44.012000Z",
+            "date_first_discovered": "2025-02-26T23:08:05.277000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -86,7 +86,7 @@
             "title": "Security Issue 10",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.984000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.534000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -95,7 +95,7 @@
             "title": "Security Issue 11",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.948000Z",
+            "date_first_discovered": "2025-02-13T23:16:18.946000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -104,7 +104,7 @@
             "title": "Security Issue 12",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.927000Z",
+            "date_first_discovered": "2025-05-07T22:54:30.167000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -113,7 +113,7 @@
             "title": "Security Issue 13",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.892000Z",
+            "date_first_discovered": "2025-05-07T22:54:30.110000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -122,7 +122,7 @@
             "title": "Security Issue 14",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.872000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.513000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -131,7 +131,7 @@
             "title": "Security Issue 15",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.840000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.492000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -140,7 +140,7 @@
             "title": "Security Issue 16",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.809000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.471000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -149,7 +149,7 @@
             "title": "Security Issue 17",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.786000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.450000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -158,7 +158,7 @@
             "title": "Security Issue 18",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.766000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.428000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -167,7 +167,7 @@
             "title": "Security Issue 19",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.744000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.408000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
@@ -176,7 +176,7 @@
             "title": "Security Issue 20",
             "severity": "Informational",
             "service": "AwsAccount",
-            "date_first_discovered": "2025-02-13T22:48:43.723000Z",
+            "date_first_discovered": "2025-02-13T22:41:44.387000Z",
             "remediation_time": "Best Effort",
             "compliance_standard": "ISO 27001 + 4",
             "full_compliance_standards": "ISO 27001\nSOC 2 Type II\nFedRAMP\nCIS Controls\nPCI DSS"
